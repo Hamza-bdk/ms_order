@@ -6,8 +6,8 @@ services:
     container_name: postgres
     environment:
       - POSTGRES_PASSWORD=secret
-      - POSTGRES_USER=keycloak_user
-      - POSTGRES_DB=keycloak_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
     ports:
       - "5432:5432"
     command: ["postgres", "-c", "log_statement=all"]
@@ -22,8 +22,8 @@ services:
       - KEYCLOAK_ADMIN_PASSWORD=admin
       - DB_VENDOR=postgres
       - DB_ADDR=postgres:5432   # The hostname is the name of the postgres service
-      - DB_DATABASE=keycloak_db  # The database name
-      - DB_USER=keycloak_user    # The user configured for Keycloak to access Postgres
+      - DB_DATABASE=postgres  # The database name
+      - DB_USER=postgres    # The user configured for Keycloak to access Postgres
       - DB_PASSWORD=secret      # The password for the postgres user
     ports:
       - "8080:8080"
