@@ -25,7 +25,9 @@ public class Order {
     @JoinColumn(name = "store_id")
     private Store store;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private String description;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
 
     private Instant deliveryDate;

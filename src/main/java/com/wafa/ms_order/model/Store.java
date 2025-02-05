@@ -18,7 +18,7 @@ import java.util.List;
 public class Store {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
@@ -36,6 +36,4 @@ public class Store {
     @Version
     private int version;
 
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    private List<Order> orders;
 }

@@ -42,7 +42,7 @@ public class OrderItemRequest implements Specification<OrderItem> {
         }
 
         if (createdBefore != null) {
-            predicates.add(criteriaBuilder.lessThan(root.<Instant> get("createdDate"), createdBefore));
+            predicates.add(criteriaBuilder.lessThan(root.get("createdDate"), createdBefore));
         }
 
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

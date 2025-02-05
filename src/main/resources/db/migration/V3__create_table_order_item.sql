@@ -17,5 +17,5 @@ CREATE TABLE item (
 	"version" int8 DEFAULT 0 NOT NULL,
 	order_id bigint NULL,
 	CONSTRAINT item_pk UNIQUE (id),
-	CONSTRAINT item_order_fk FOREIGN KEY (id) REFERENCES "order"(id)
+	CONSTRAINT item_order_fk FOREIGN KEY (order_id) REFERENCES "order"(id)
 );

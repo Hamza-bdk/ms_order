@@ -48,11 +48,19 @@ public class OrderItem {
     @Version
     private int version;
 
+    @Transient
+    private String location;
+
     @PrePersist
     public void calculateImageUri() {
         imageUri = String.format(
             "http://localhost:8080/product-image/%s.png",
             name.replace(" ", "_")
         );
+    }
+
+    @PostPersist
+    public void calculateLocation(){
+        location = "prefix/"+id;
     }
 }
