@@ -1,20 +1,16 @@
 package com.wafa.ms_order.service.impl;
 
 import com.wafa.ms_order.common.exception.NotFoundException;
-import com.wafa.ms_order.listener.OrderCreationEvent;
 import com.wafa.ms_order.model.Order;
 import com.wafa.ms_order.model.ServiceType;
 import com.wafa.ms_order.model.Status;
-import com.wafa.ms_order.model.Store;
 import com.wafa.ms_order.repository.OrderRepository;
-import com.wafa.ms_order.repository.StoreRepository;
 import com.wafa.ms_order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.beans.Transient;
 import java.util.*;
 
 @Service
@@ -22,8 +18,6 @@ import java.util.*;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
-    private final StoreRepository storeRepository;
-    private final ApplicationEventPublisher applicationEventPublisher;
 
 
     @Override
@@ -39,19 +33,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public Order save(Order order) {
-        var storeId = order.getStore().getId();
-        var store = storeRepository.findById(storeId).orElseThrow(() -> new NotFoundException("No store with id " + storeId));
-        order.setStore(store);
         var savedOrder = orderRepository.save(order);
-        applicationEventPublisher.publishEvent(new OrderCreationEvent(savedOrder));
         return savedOrder;
     }
 
     @Override
     public List<Order> findByStoreId(Long id) {
-        var store = new Store();
-        store.setId(id);
-        return orderRepository.findByStore(store);
+        return orderRepository.findByStoreId(id);
     }
 
     @Override

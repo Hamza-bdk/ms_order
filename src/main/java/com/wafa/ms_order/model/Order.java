@@ -1,6 +1,7 @@
 package com.wafa.ms_order.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -21,9 +22,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "store_id")
-    private Store store;
+    @NotNull
+    private Long storeId;
 
     private String description;
 

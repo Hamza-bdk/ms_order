@@ -1,1 +1,0 @@
-ALTER TABLE "order" ADD COLUMN IF NOT EXISTS description varchar;
